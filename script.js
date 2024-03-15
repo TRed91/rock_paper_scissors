@@ -10,11 +10,14 @@
 //Play a round of rock paper scissors by calling a function
     //create function playRound with playerSelection and computerSelection as parameters
     //compare playerSelection to computerSelection 
-                    //if computerSelection is rock and palyerSelection is rock => tie 
-                    //if computerSelection is rock and palyerSelection is paper => win
-                    //an so on
+                    //if computerSelection and playerSelection are equal it's a tie
+                    //if computerSelection is rock and palyerSelection is paper => player wins
+                    //and so on
 
-//Have Computer pick either rock, paper or scissors and return the choice
+//Make playGame function that runs the playRound 5 times.
+
+//Call playGame function to start the game
+
 
 function getComputerChoice(){
 
@@ -33,37 +36,45 @@ function getComputerChoice(){
 }
 
 function playRound(playerSelection, computerSelection) {
-    // if (playerSelection === "rock" || "paper" || "scissors") {
-    //     return "Type in a valid option!"
-    // }
-    if (playerSelection === computerSelection){
-        return `You both chose '${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}' It's a tie!`
+     if (playerSelection === "rock" || "paper" || "scissors") {
+        
+        if (playerSelection === computerSelection){
+            return `You both chose '${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}' It's a tie!`;
+        }
+        
+        if (playerSelection === "rock") {
+            return (computerSelection === "paper") ? 
+            "'Paper' beats 'Rock'. You lose." : 
+            "'Rock' beats 'Scissors'. You win!";
+        }
+        
+        if (playerSelection === "paper") {
+            return (computerSelection === "scissors") ? 
+            "'Scissors' beats 'Paper'. You lose." : 
+            "'Paper' beats 'Rock'. You win!";
+        }
+        
+        if (playerSelection === "scissors") {
+            return (computerSelection === "rock") ? 
+            "'Rock' beats 'Scissors'. You lose." : 
+            "'Scissors' beats 'Paper'. You win!";
+        }
+      
+     } else {
+        return "Type in a valid option!";
+     }
     }
-    
-    if (playerSelection === "rock") {
-        return (computerSelection === "paper") ? 
-        "'Paper' beats 'Rock'. You lose." : 
-        "'Rock' beats 'Scissors'. You win!"
-    }
-    
-    if (playerSelection === "paper") {
-        return (computerSelection === "scissors") ? 
-        "'Scissors' beats 'Paper'. You lose." : 
-        "'Paper' beats 'Rock'. You win!"
-    }
-    
-    if (playerSelection === "scissors") {
-        return (computerSelection === "rock") ? 
-        "'Rock' beats 'Scissors'. You lose." : 
-        "'Scissors' beats 'Paper'. You win!"
-    }
-  }
   
-const computerSelection = getComputerChoice();
-const playerSelection = prompt("Choose rock, paper or scissors").toLowerCase();
-console.log("You chose: "+ playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1));
-console.log("Computer chose: " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
-console.log(playRound(playerSelection, computerSelection));
+    function playGame() {
+        for (let i = 0; i < 5; i++){
+            const computerSelection = getComputerChoice();
+            const playerSelection = prompt("Choose rock, paper or scissors").toLowerCase();
+            playRound(playerSelection, computerSelection);
+            console.log("You chose: "+ playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1));
+            console.log("Computer chose: " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
+            console.log(playRound(playerSelection, computerSelection));
+        }
+    }
+  
 
-  
-//console.log(playerSelection);
+playGame();
