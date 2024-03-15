@@ -86,23 +86,24 @@ function playRound(playerSelection, computerSelection) {
             const computerSelection = getComputerChoice();
             const playerSelection = prompt("Choose rock, paper or scissors").toLowerCase();
             playRound(playerSelection, computerSelection);
+
             console.log("You chose: "+ playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1));
             console.log("Computer chose: " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
+
             console.log(playRound(playerSelection, computerSelection));
         }
     }
 
-    function determineWinner(winCounterPlayer, winCounterComputer) {
-        if (winCounter === 0) {
+    function determineWinner(winCounter) {
+         if (winCounter === 0) {
             return "It's a tie";
         } else if (winCounter > 0) {
-            return "You win!";
+            return "Congratulations! You won!";
         } else {
-            return "You lose."
+            return "You lose. Better luck next time!";
         }
     }
 
 let winCounter = 0;
-
 playGame();
 console.log(determineWinner(winCounter));
