@@ -43,67 +43,64 @@ function playRound(playerSelection, computerSelection) {
             return `You both chose '${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}' It's a tie!`;
         }
         
-        if (playerSelection === "rock") {
-            if (computerSelection === "paper") {
-                winCounter -= 1;
-               return "'Paper' beats 'Rock'. You lose.";
-            } else {
-                winCounter += 1;
-                return "'Rock' beats 'Scissors'. You win!";
-            }
+        if (playerSelection === "rock" && computerSelection === "scissors"){
+            return `${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}. You win!`
         }
         
-        if (playerSelection === "paper") {
-            if (computerSelection === "scissors") {
-                winCounter -= 1;
-                return "'Scissors' beats 'Paper'. You lose.";
-             } else {
-                winCounter += 1;
-                return "'Paper' beats 'Rock'. You win!";
-            }
+        if (playerSelection === "scissors" && computerSelection === "paper"){
+            return `${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}. You win!`
         }
-        
-        if (playerSelection === "scissors") {
-            if (computerSelection === "rock") { 
-                winCounter -= 1;
-                return "'Rock' beats 'Scissors'. You lose." ; 
-            } else {
-                winCounter += 1;
-                return "'Scissors' beats 'Paper'. You win!";
-            }
+
+        if (playerSelection === "paper" && computerSelection === "rock"){
+            return `${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}. You win!`
         }
-      
-     } else {
-        winCounter -= 1;
-        return "Can't even type Rock, Paper or Scissors eh? Computer wins.";
+
+        if (playerSelection === "rock" && computerSelection === "paper"){
+            return `${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}. You lose!`
+        }
+
+        if (playerSelection === "paper" && computerSelection === "scissors"){
+            return `${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}. You lose!`
+        }
+
+        if (playerSelection === "scissors" && computerSelection === "rock"){
+            return `${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}. You lose!`
+        }
+
+        } else {
+        return "Can't even type Rock, Paper or Scissors eh? Computer wins this round.";
      }
     }
   
     function playGame() {
 
+        let winCounter = 0;
+
         for (let i = 0; i < 5; i++){
 
             const computerSelection = getComputerChoice();
             const playerSelection = prompt("Choose rock, paper or scissors").toLowerCase();
-            playRound(playerSelection, computerSelection);
+            const result = playRound(playerSelection, computerSelection);
+
+            if (result === `${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)}. You win!`){
+                winCounter ++ ;
+            } 
+            if (result === `${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)}. You lose!` 
+            || result === "Can't even type Rock, Paper or Scissors eh? Computer wins this round."){
+                winCounter -- ;
+             }
 
             console.log("You chose: "+ playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1));
             console.log("Computer chose: " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
+            console.log(result);
+        }
 
-            console.log(playRound(playerSelection, computerSelection));
+        if (winCounter === 0) {
+            return "The game ended in a tie."
+        }else if (winCounter > 0) {
+            return "Congratulations! You won!"
+        }else {
+            return "You lost. Better luck next time!"
         }
     }
-
-    function determineWinner(winCounter) {
-         if (winCounter === 0) {
-            return "It's a tie";
-        } else if (winCounter > 0) {
-            return "Congratulations! You won!";
-        } else {
-            return "You lose. Better luck next time!";
-        }
-    }
-
-let winCounter = 0;
-playGame();
-console.log(determineWinner(winCounter));
+console.log(playGame());
