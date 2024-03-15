@@ -45,36 +45,36 @@ function playRound(playerSelection, computerSelection) {
         
         if (playerSelection === "rock") {
             if (computerSelection === "paper") {
-                winCounterComputer += 1;
+                winCounter -= 1;
                return "'Paper' beats 'Rock'. You lose.";
             } else {
-                winCounterPlayer += 1;
+                winCounter += 1;
                 return "'Rock' beats 'Scissors'. You win!";
             }
         }
         
         if (playerSelection === "paper") {
             if (computerSelection === "scissors") {
-                winCounterComputer += 1;
+                winCounter -= 1;
                 return "'Scissors' beats 'Paper'. You lose.";
              } else {
-                winCounterPlayer += 1;
+                winCounter += 1;
                 return "'Paper' beats 'Rock'. You win!";
             }
         }
         
         if (playerSelection === "scissors") {
             if (computerSelection === "rock") { 
-                winCounterComputer += 1;
+                winCounter -= 1;
                 return "'Rock' beats 'Scissors'. You lose." ; 
             } else {
-                winCounterPlayer += 1;
+                winCounter += 1;
                 return "'Scissors' beats 'Paper'. You win!";
             }
         }
       
      } else {
-        winCounterComputer += 1;
+        winCounter -= 1;
         return "Can't even type Rock, Paper or Scissors eh? Computer wins.";
      }
     }
@@ -92,18 +92,17 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 
-    function compareCounters(winCounterPlayer, winCounterComputer) {
-        if (winCounterComputer === winCounterPlayer) {
+    function determineWinner(winCounterPlayer, winCounterComputer) {
+        if (winCounter === 0) {
             return "It's a tie";
-        } else if (winCounterPlayer > winCounterComputer) {
+        } else if (winCounter > 0) {
             return "You win!";
         } else {
             return "You lose."
         }
     }
 
-let winCounterPlayer = 0;
-let winCounterComputer = 0;
+let winCounter = 0;
 
 playGame();
-console.log(compareCounters(winCounterPlayer, winCounterComputer));
+console.log(determineWinner(winCounter));
