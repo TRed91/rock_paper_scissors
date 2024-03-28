@@ -77,12 +77,14 @@ function playRound(event) {
       announceWinner.textContent = '';
     } else {
       if (playerScore >= 5) {
+        announceWinner.setAttribute('style', 'color: greenyellow')
         announceWinner.textContent = 'Player wins the game!';
         playerScore = 0;
         computerScore = 0;
       } 
   
       if (computerScore >= 5) {
+        announceWinner.setAttribute('style', 'color: red')
         announceWinner.textContent = 'Computer wins the game!';
         playerScore = 0;
         computerScore = 0;
