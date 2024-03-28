@@ -73,9 +73,6 @@ function playRound(event) {
 
     resultText.textContent = result;
     displayScore.textContent = `Player Score = ${playerScore}, Computer Score = ${computerScore}`;
-    
-    
-
     if (playerScore < 5 && computerScore < 5) {
       announceWinner.textContent = '';
     } else {
