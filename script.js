@@ -5,6 +5,12 @@ btnContainer.addEventListener('click', playRound);
 
 let playerScore = 0;
 let computerScore = 0; 
+const resultText = document.createElement("div");
+const displayScore = document.createElement("div");
+const announceWinner = document.createElement("div");
+body.appendChild(resultText);
+body.appendChild(displayScore);
+body.appendChild(announceWinner);
 
 function getComputerChoice (){
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -54,22 +60,37 @@ function resultCalc(playerSelection, computerSelection) {
           computerScore += 1;
      return `${compSelectionConv(computerSelection)} beats ${playerInputConversion(playerSelection)}. Computer wins.`;
 
-    } else {
-    return "Invalid input";
-    }
+    } 
 }
 
 function playRound(event) {
+    
     let target = event.target;
     const computerSelection = getComputerChoice();
     const playerSelection = getPlayerChoice(target);
     const result = resultCalc(playerSelection, computerSelection);
-    const resultText = document.createElement("div");
-    const displayScore = document.createElement("div");
+    
+
     resultText.textContent = result;
     displayScore.textContent = `Player Score = ${playerScore}, Computer Score = ${computerScore}`;
-    body.appendChild(resultText);
-    body.appendChild(displayScore);
+    
+    
+
+    if (playerScore < 5 && computerScore < 5) {
+      announceWinner.textContent = '';
+    } else {
+      if (playerScore >= 5) {
+        announceWinner.textContent = 'Player wins the game!';
+        playerScore = 0;
+        computerScore = 0;
+      } 
+  
+      if (computerScore >= 5) {
+        announceWinner.textContent = 'Computer wins the game!';
+        playerScore = 0;
+        computerScore = 0;
+      }
+    }
   }
   
  
