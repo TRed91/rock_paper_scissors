@@ -60,7 +60,7 @@ function compSelectionConv(computerSelection) {
       } else if (result === `${compSelectionConv(computerSelection)} beats ${playerInputConversion(playerSelection)}. Computer wins.`) {
         winCounter --;
       }
-      console.log(winCounter);
+
     }
   
     if (winCounter > 0) {
