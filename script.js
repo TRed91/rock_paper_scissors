@@ -3,6 +3,9 @@ const body = document.querySelector('body');
 
 btnContainer.addEventListener('click', playRound);
 
+let playerScore = 0;
+let computerScore = 0; 
+
 function getComputerChoice (){
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     switch (randomNumber) {
@@ -41,12 +44,14 @@ function resultCalc(playerSelection, computerSelection) {
    } else if ( playerSelection === "rock" && computerSelection === "scissors" ||
          playerSelection === "paper" && computerSelection === "rock" ||
          playerSelection === "scissors" && computerSelection === "paper" ) {
+          playerScore += 1;
      return `${playerInputConversion(playerSelection)} beats ${compSelectionConv(computerSelection)}. Player wins!`;
 
 
    } else if ( playerSelection === "rock" && computerSelection === "paper" ||
          playerSelection === "paper" && computerSelection === "scissors" ||
          playerSelection === "scissors" && computerSelection === "rock" ) {
+          computerScore += 1;
      return `${compSelectionConv(computerSelection)} beats ${playerInputConversion(playerSelection)}. Computer wins.`;
 
     } else {
@@ -60,8 +65,11 @@ function playRound(event) {
     const playerSelection = getPlayerChoice(target);
     const result = resultCalc(playerSelection, computerSelection);
     const resultText = document.createElement("div");
+    const displayScore = document.createElement("div");
     resultText.textContent = result;
+    displayScore.textContent = `Player Score = ${playerScore}, Computer Score = ${computerScore}`;
     body.appendChild(resultText);
+    body.appendChild(displayScore);
   }
   
  
